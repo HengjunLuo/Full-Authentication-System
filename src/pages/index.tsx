@@ -5,18 +5,29 @@ export default function Home() {
   console.log(session);
 
   return (
-    <>
-
-      {
-        session ?
-          <>
-            <h1 className="text-red-700 text-4xl bg-yellow-200">{session?.user?.email}</h1>
-            <img src={session?.user?.image!} alt="" className="w-[128px h-32 rounded-full" />
-            <button onClick={() => signOut()} className="bg-purple-200">Sign Out</button>
-          </> :
-          <button onClick={() => signIn()} className="bg-purple-200">Sign In</button>
-      }
-    </>
+    <div className="bg-black min-h-screen text-white flex items-center justify-center">
+      <div className="mx-auto">
+        <div className="border border-white relative flex flex-col w-full rounded-lg">
+          <div className="flex flex-wrap justify-center items-center">
+            <div className="w-full text-right">
+              <div className="py-6 px-3">
+                <button className="bg-blue-400 hover:bg-blue-700 text-md uppercase font-bold px-8 py-2 rounded-md sm:mr-2 mb-1 ease-linear transition-all duration-200" 
+                onClick={() => signOut()}>Sign Out</button>
+              </div>
+            </div>
+            <div className="w-full justify-center flex">
+              <img src={session?.user?.image} alt={`${session?.user.name} image`} className="rounded-full w-40 h-40" />
+            </div>
+            <div className="text-center mt-12">
+              <h3 className="text-4x1 font-semibold mb-b">{session?.user?.name}</h3>
+              <div className="tetx-sm mb-2 font-bold">{session?.user?.email}</div>
+              <div className="mb-2 mt-10"> You Logged in using &nbsp;
+                <span className="capitalize bg-blue-400 px-4 py-1 ml-2 font-bld italix text-lg rounded-md">{session?.user?.provider}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
