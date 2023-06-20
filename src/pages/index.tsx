@@ -6,7 +6,7 @@ export default function Home() {
   console.log(session);
 
   return (
-    <div className="bg-black min-h-screen text-white flex items-center justify-center">
+    <div className="home bg-black min-h-screen text-white flex items-center justify-center">
       <div className="container mx-auto">
         <div className="border border-white relative flex flex-col w-full rounded-lg">
           <div className="flex flex-wrap justify-center items-center">
