@@ -4,6 +4,8 @@ import { AiOutlineUser, AiOutlineMail, AiOutlinePhone, AiOutlineLock } from "rea
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import validator from 'validator';
+import { useState } from 'react';
+import zxcvbn from "zxcvbn";
 import { zodResolver } from "@hookform/resolvers/zod";
 interface IRegisterformProps { }
 
@@ -29,7 +31,15 @@ const FormSchema = z.object({
 type FormSchemaType = z.infer<typeof FormSchema>;
 const Registerform: React.FunctionComponent<IRegisterformProps> = (props) => {
   const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<FormSchemaType>({ resolver: zodResolver(FormSchema) });
+  const [passwordScore, setPasswordScore] = useState(0);
   const onSubmit = (data: any) => console.log(data);
+  const calcPwdStrength = () => {
+    let password = watch().password;
+    return zxcvbn(password ? password : '').score;
+  }
+  React.useEffect(() => {
+    setPasswordScore(calcPwdStrength());
+  }, [watch().password])
   return (
     <form className='my-8 text-sm' onSubmit={handleSubmit(onSubmit)}>
       <div className='gap-2 md:flex flex-col'>
@@ -38,6 +48,20 @@ const Registerform: React.FunctionComponent<IRegisterformProps> = (props) => {
         <Input name="email" label="Email address" type="text" icon={<AiOutlineMail />} placeholder="abcd@efg.com" register={register} error={errors?.email?.message} disabled={isSubmitting}></Input>
         <Input name="phone" label="Phone number" type="text" icon={<AiOutlinePhone />} placeholder="+(xxx) xxx-xxx-xxx" register={register} error={errors?.phone?.message} disabled={isSubmitting}></Input>
         <Input name="password" label="Password" type="text" icon={<AiOutlineLock />} placeholder="Enter password here" register={register} error={errors?.password?.message} disabled={isSubmitting}></Input>
+        {
+          watch().password?.length > 0 && <div className='flex mt-2'>
+            {Array.from(Array(5).keys()).map((span, i) => (
+              <span className='w-1/5 px-1' key={i}>
+                <div className={`h-2 rounded-xl 
+                ${
+                  passwordScore<=2 ? "bg-red-400"
+                  : passwordScore <4 ? "bg-yellow-400"
+                  : "bg-green-400"
+                }`}></div>
+              </span>
+            ))}
+          </div>
+        }
         <Input name="confirmPassword" label="Confirm Password" type="text" icon={<AiOutlineLock />} placeholder="Re-enter password here" register={register} error={errors?.confirmPassword?.message} disabled={isSubmitting}></Input>
       </div>
       <button type='submit'>Submit</button>
