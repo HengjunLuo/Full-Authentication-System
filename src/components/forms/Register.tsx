@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Input from '../inputs/Input';
-import { AiOutlineUser, AiOutlineMail, AiOutlinePhone, AiOutlineLock } from "react-icons/ai";
+import { AiOutlineUser, AiOutlineMail, AiOutlinePhone, AiOutlineLock, AiFillLock } from "react-icons/ai";
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import validator from 'validator';
 import { useState } from 'react';
 import zxcvbn from "zxcvbn";
 import { zodResolver } from "@hookform/resolvers/zod";
+import SlideButton from '../buttons/SlideButton';
 interface IRegisterformProps { }
 
 const FormSchema = z.object({
@@ -23,6 +24,11 @@ const FormSchema = z.object({
   password: z.string().min(8, "Password must be between 8~64 characters")
     .max(64, "Password must be between 8~64 characters"),
   confirmPassword: z.string(),
+  accept: z.literal(true, {
+    errorMap: () => ({
+      message: "Please agree to all the terms and conditions before continuing."
+    })
+  })
 })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password unmatch!",
@@ -42,29 +48,46 @@ const Registerform: React.FunctionComponent<IRegisterformProps> = (props) => {
   }, [watch().password])
   return (
     <form className='my-8 text-sm' onSubmit={handleSubmit(onSubmit)}>
-      <div className='gap-2 md:flex flex-col'>
+      {/*------------Name Inputs-------------*/}
+      <div className='gap-2 md:flex'>
         <Input name="first_name" label="First name" type="text" icon={<AiOutlineUser />} placeholder="Enter first name here" register={register} error={errors?.first_name?.message} disabled={isSubmitting}></Input>
         <Input name="last_name" label="Last name" type="text" icon={<AiOutlineUser />} placeholder="Enter last name here" register={register} error={errors?.last_name?.message} disabled={isSubmitting}></Input>
-        <Input name="email" label="Email address" type="text" icon={<AiOutlineMail />} placeholder="abcd@efg.com" register={register} error={errors?.email?.message} disabled={isSubmitting}></Input>
-        <Input name="phone" label="Phone number" type="text" icon={<AiOutlinePhone />} placeholder="+(xxx) xxx-xxx-xxx" register={register} error={errors?.phone?.message} disabled={isSubmitting}></Input>
-        <Input name="password" label="Password" type="text" icon={<AiOutlineLock />} placeholder="Enter password here" register={register} error={errors?.password?.message} disabled={isSubmitting}></Input>
-        {
-          watch().password?.length > 0 && <div className='flex mt-2'>
-            {Array.from(Array(5).keys()).map((span, i) => (
-              <span className='w-1/5 px-1' key={i}>
-                <div className={`h-2 rounded-xl 
-                ${
-                  passwordScore<=2 ? "bg-red-400"
-                  : passwordScore <4 ? "bg-yellow-400"
-                  : "bg-green-400"
-                }`}></div>
-              </span>
-            ))}
-          </div>
-        }
-        <Input name="confirmPassword" label="Confirm Password" type="text" icon={<AiOutlineLock />} placeholder="Re-enter password here" register={register} error={errors?.confirmPassword?.message} disabled={isSubmitting}></Input>
       </div>
-      <button type='submit'>Submit</button>
+      {/*-------------Email, Phone, password and confirm password Inputs-------------*/}
+      <Input name="email" label="Email address" type="text" icon={<AiOutlineMail />} placeholder="abcd@efg.com" register={register} error={errors?.email?.message} disabled={isSubmitting}></Input>
+      <Input name="phone" label="Phone number" type="text" icon={<AiOutlinePhone />} placeholder="+(xxx) xxx-xxx-xxx" register={register} error={errors?.phone?.message} disabled={isSubmitting}></Input>
+      <Input name="password" label="Password" type="password" icon={<AiOutlineLock />} placeholder="Enter password here" register={register} error={errors?.password?.message} disabled={isSubmitting}></Input>
+      {/*Check for password strenghth*/
+        watch().password?.length > 0 && <div className='flex mt-2'>
+          {Array.from(Array(5).keys()).map((span, i) => (
+            <span className='w-1/5 px-1' key={i}>
+              <div className={`h-2 rounded-xl 
+                ${passwordScore <= 2 ? "bg-red-400"
+                  : passwordScore < 4 ? "bg-yellow-400"
+                    : "bg-green-400"
+                }`}></div>
+            </span>
+          ))}
+        </div>
+      }
+      <Input name="confirmPassword" label="Confirm Password" type="password" icon={<AiOutlineLock />} placeholder="Re-enter password here" register={register} error={errors?.confirmPassword?.message} disabled={isSubmitting}></Input>
+      {/*-------------Accept terms and privacy condition-------------*/}
+      <div className='flex items-center mt-3'>
+        <input type="checkbox" id='accept' className='mr-2 focus:ring-0 rounded' {...register("accept")} />
+        <label htmlFor="accept" className='text-gray-700'>
+          I Accept the&nbsp;
+          <a href='' target='_blank' className='text-blue-700 hover:underline'>terms</a>
+          &nbsp;and&nbsp;
+          <a href='' target='_blank' className='text-blue-700 hover:underline' >privacy policy</a>
+        </label>
+      </div>
+      <div>
+        {/*error message*/
+          errors?.accept && <p className='text-sm text-red-500 mt-1'>{errors?.accept?.message}</p>
+        }
+      </div>
+      {/*-------------Fancy slide submit button-------------*/}
+      <SlideButton type='submit' text='Sign Up' slide_text='Secure sign up' icon={<AiFillLock />} disabled={isSubmitting}></SlideButton>
     </form>);
 };
 

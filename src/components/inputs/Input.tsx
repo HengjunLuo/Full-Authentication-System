@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { IoAlertCircle } from 'react-icons/io5'
 interface IInputProps {
     name: string;
@@ -13,6 +14,7 @@ interface IInputProps {
 
 const Input: React.FunctionComponent<IInputProps> = (props) => {
     const { name, label, type, icon, placeholder, register, error, disabled } = props;
+    const [showPassword, SetShowPassword] = React.useState(false)
     return (
         <div className='mt-3 w-[100%]'>
             <label htmlFor={name} className='text-gray-700'>{label}</label>
@@ -21,8 +23,9 @@ const Input: React.FunctionComponent<IInputProps> = (props) => {
                     style={{ transform: `${error ? "translateY(-12px)" : ""}` }}>
                     <span className="text-gray-500 text-sm">{icon}</span>
                 </div>
+                {/*Input type changes for visible/invisile passwords, no effect on other types*/}
                 <input
-                    type={type}
+                    type={showPassword ? "text" : type} 
                     className='w-full py-2 pr-7 pl-8 block rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-blue-500 focus:ring-indigo-500 focus:ring-2 text-sm'
                     placeholder={placeholder}
                     {...register(name)}
@@ -31,6 +34,16 @@ const Input: React.FunctionComponent<IInputProps> = (props) => {
                         borderColor: `${error ? "#ED4337" : ""}`,
                     }}
                 />
+                {/*---------show/hide password-------------*/}
+                {
+                    (name == 'password' || name == 'confirmPassword') 
+                    && 
+                    <div className='absolute top-2.5 right-2 text-xl text-gray-700 cursor-pointer'
+                    onClick={()=>SetShowPassword((prev)=>!prev)}>
+                        {showPassword ? <AiFillEye/> : <AiFillEyeInvisible/>}
+                    </div>
+                }
+                {/*--------------Invalid Input Alert--------------*/}
                 {
                     error &&
                     (
