@@ -1,13 +1,15 @@
 import * as React from 'react';
 import Input from '../inputs/Input';
 import { AiOutlineUser, AiOutlineMail, AiOutlinePhone, AiOutlineLock, AiFillLock } from "react-icons/ai";
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from "zod";
 import validator from 'validator';
 import { useState } from 'react';
 import zxcvbn from "zxcvbn";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SlideButton from '../buttons/SlideButton';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 interface IRegisterformProps { }
 
 const FormSchema = z.object({
@@ -38,7 +40,16 @@ type FormSchemaType = z.infer<typeof FormSchema>;
 const Registerform: React.FunctionComponent<IRegisterformProps> = (props) => {
   const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<FormSchemaType>({ resolver: zodResolver(FormSchema) });
   const [passwordScore, setPasswordScore] = useState(0);
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit:SubmitHandler<FormSchemaType>=async(values)=>{
+    try{
+      const {data} = await axios.post("/api/auth/signup",{
+        ...values,
+      });
+      toast.success(data.message);
+    }catch(error: any){
+      toast.error(error.response.data.message);
+    }
+  };
   const calcPwdStrength = () => {
     let password = watch().password;
     return zxcvbn(password ? password : '').score;
