@@ -22,7 +22,7 @@ export default function auth() {
                     </div>
                 </div>
                 {/*----------Background----------*/}
-                <Background/>
+                <Background image='../../auth/auth.jpg'/>
             </div>
         </div>
     )
