@@ -50,8 +50,8 @@ const Registerform: React.FunctionComponent<IRegisterformProps> = (props) => {
     <form className='my-8 text-sm' onSubmit={handleSubmit(onSubmit)}>
       {/*------------Name Inputs-------------*/}
       <div className='gap-2 md:flex'>
-        <Input name="first_name" label="First name" type="text" icon={<AiOutlineUser />} placeholder="Enter first name here" register={register} error={errors?.first_name?.message} disabled={isSubmitting}></Input>
-        <Input name="last_name" label="Last name" type="text" icon={<AiOutlineUser />} placeholder="Enter last name here" register={register} error={errors?.last_name?.message} disabled={isSubmitting}></Input>
+        <Input name="first_name" label="First name" type="text" icon={<AiOutlineUser />} placeholder="E.g. Jhon" register={register} error={errors?.first_name?.message} disabled={isSubmitting}></Input>
+        <Input name="last_name" label="Last name" type="text" icon={<AiOutlineUser />} placeholder="E.g. Joe" register={register} error={errors?.last_name?.message} disabled={isSubmitting}></Input>
       </div>
       {/*-------------Email, Phone, password and confirm password Inputs-------------*/}
       <Input name="email" label="Email address" type="text" icon={<AiOutlineMail />} placeholder="abcd@efg.com" register={register} error={errors?.email?.message} disabled={isSubmitting}></Input>
