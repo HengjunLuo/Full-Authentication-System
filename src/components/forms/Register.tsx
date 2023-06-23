@@ -38,13 +38,14 @@ const FormSchema = z.object({
   });
 type FormSchemaType = z.infer<typeof FormSchema>;
 const Registerform: React.FunctionComponent<IRegisterformProps> = (props) => {
-  const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<FormSchemaType>({ resolver: zodResolver(FormSchema) });
+  const { register, handleSubmit, watch, reset, formState: { errors, isSubmitting } } = useForm<FormSchemaType>({ resolver: zodResolver(FormSchema) });
   const [passwordScore, setPasswordScore] = useState(0);
   const onSubmit:SubmitHandler<FormSchemaType>=async(values)=>{
     try{
       const {data} = await axios.post("/api/auth/signup",{
         ...values,
       });
+      reset();
       toast.success(data.message);
     }catch(error: any){
       toast.error(error.response.data.message);
