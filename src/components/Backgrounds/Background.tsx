@@ -6,7 +6,7 @@ interface IBackgroundProps {
 
 const Background: React.FunctionComponent<IBackgroundProps> = (props) => {
   const { image } = props;
-    return <div className=' min-h-screen lg:flex lg:w-1/2 xl:w-2/3 2xwl:w-3/4 bg-contain bg-no-repeat bg-center'
+    return <div className=' min-h-screen lg:flex lg:w-2/5 xl:w-2/5 2xwl:w-1/2 bg-contain bg-no-repeat bg-center'
   style={{backgroundImage: `url(${image})`}}></div>;
 };
 
