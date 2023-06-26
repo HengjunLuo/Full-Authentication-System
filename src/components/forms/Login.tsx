@@ -44,7 +44,7 @@ const Loginform: React.FunctionComponent<ILoginformProps> = (props) => {
                 Sign In
             </h2>
             <p className="text-center text-sm text-gray-6000 mt-2">
-                Don't have an account? &nbsp;
+                Do not have an account? &nbsp;
                 <a onClick={() => {
                     router.push({
                         pathname: path,

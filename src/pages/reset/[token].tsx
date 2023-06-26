@@ -4,7 +4,7 @@ import Resetform from '@/components/forms/Reset'
 import { NextPageContext } from 'next'
 import React from 'react'
 
-export default function auth({ token }: { token: string }) {
+export default function Reset({ token }: { token: string }) {
     return (
         <div className='w-full flex items-center justify-center'>
             <div className='w-full h-100 flex items-center justify-center'>
