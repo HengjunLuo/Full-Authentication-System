@@ -131,18 +131,25 @@ export const activateTemplateEmail = `<!DOCTYPE html>
 															<td class="pad" style="padding-bottom:10px;padding-left:40px;padding-right:40px;padding-top:10px;">
 																<div style="font-family: sans-serif">
 																	<div class style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #555555; line-height: 1.2;">
-																		<p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 19.2px;"><span style="font-size:24px;">Welcome, {{name}}</span></p>
+																		<p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 19.2px;"><span style="font-size:24px;">Hello, {{name}}</span></p>
 																	</div>
 																</div>
 															</td>
 														</tr>
 													</table>
-													<table class="text_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+													<table class="html_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+														<tr>
+															<td class="pad">
+																<div style="font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;text-align:center;" align="center"><img class="adapt-img" src="{{image}}" alt style="disokay: block; border:0; outline: none; texte-decoration-none; border-radius:50%; width=" height="145" /></div>
+															</td>
+														</tr>
+													</table>
+													<table class="text_block block-3" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
 														<tr>
 															<td class="pad" style="padding-bottom:10px;padding-left:40px;padding-right:40px;padding-top:10px;">
 																<div style="font-family: sans-serif">
 																	<div class style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 18px; color: #555555; line-height: 1.5;">
-																		<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;">You're receiving this message because you recently signed up for a account for Full Authentication System.<br><br>Confirm your email address by clicking the button below.&nbsp;</p>
+																		<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;">You're receiving this message because you recently signed up for a account for Full Authentication System.<br><br>Confirm your email address by clicking the button below.&nbsp;&nbsp;</p>
 																	</div>
 																</div>
 															</td>

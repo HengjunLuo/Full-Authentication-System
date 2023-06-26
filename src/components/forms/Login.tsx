@@ -8,6 +8,7 @@ import SlideButton from '../buttons/SlideButton';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 
 interface ILoginformProps { callbackUrl: string, csrfToken: string }
 
@@ -30,7 +31,6 @@ const Loginform: React.FunctionComponent<ILoginformProps> = (props) => {
             password: values.password,
             callbackUrl,
         });
-        console.log(res)
         if (res.error) {
             return toast.error(res.error);
         }else{
@@ -69,6 +69,7 @@ const Loginform: React.FunctionComponent<ILoginformProps> = (props) => {
                 </div>
                 {/*-------------Fancy slide submit button-------------*/}
                 <SlideButton type='submit' text='Sign In' slide_text='Secure sign in' icon={<AiFillLock />} disabled={isSubmitting}></SlideButton>
+                <Link href="/forgot" className='text-blue-600 hover:underline' >Fotgot Password?</Link>
             </form>
         </div>);
 };

@@ -9,7 +9,7 @@ import SocialButton from '@/components/buttons/SocialButton'
 export default function auth({ tab, callbackUrl, csrfToken, providers }: { tab: string, callbackUrl: string, csrfToken: string, providers: any }) {
     return (
         <div className='w-full flex items-center justify-center'>
-            <div className='w-full h-100 flex items=center justify-center'>
+            <div className='w-full h-100 flex items-center justify-center'>
                 {/*----------Registry Form----------*/}
                 <div className='w-full sm:w5/6 md:w-2/3 lg:w1/2 xl:w-1/3 2xl:w-1/3 h-full bg-white flex flex-col items-center justify-center'>
                     {
@@ -40,7 +40,7 @@ export default function auth({ tab, callbackUrl, csrfToken, providers }: { tab: 
 }
 
 export async function getServerSideProps(ctx: NextPageContext) {
-    const { req, query } = ctx;
+    const { req, query, } = ctx;
     const tab = query.tab ? query.tab : "signin";
     const callbackUrl = query.callbackUrl ? query.callbackUrl : process.env.NEXTAUTH_URL;
     const csrfToken = await getCsrfToken(ctx);
