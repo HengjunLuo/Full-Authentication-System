@@ -34,7 +34,7 @@ const Loginform: React.FunctionComponent<ILoginformProps> = (props) => {
         if (res.error) {
             return toast.error(res.error);
         }else{
-            return router.push('');
+            return router.push('/');
         }
     }
 
