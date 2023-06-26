@@ -11,6 +11,7 @@ export async function middleware(req:NextRequest){
     });
     if(pathname=="/"){
         if(!session){
+            console.log('what')
             return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/auth`);
         }
     }
