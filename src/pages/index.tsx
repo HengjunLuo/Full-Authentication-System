@@ -29,10 +29,10 @@ export default function Home() {
           <div className="mt-10 py-10 border-t text-center">
             <div className="flex flex-wrap justify-center">
                 <div className="w-full px-4">
-                  <p className="mb-4 text-sm">This is an Authentication System with full functionalities.</p>
-                  <p className="font-bold text-xs">This project is built using Typescript, Next.js, NextAuth.js, React.js</p>
+                  <p className="mb-4 text-sm">This is an Authentication System with full functionalities including register, login, forgot and reset password, sending avctivation and reset password emails, advanced form validation, route protection, and session manipulation...</p>
+                  <p className="font-bold text-xs">This project is built using Typescript, Next.js, NextAuth.js, React.js, Nodemailer, Mongodb, Mongoose...</p>
                   <div className="mt-6 flex items-center justify-center gap2">
-                    Source Code Here: &nbsp;
+                    Source Code: &nbsp;
                     <a href="https://github.com/HengjunLuo/Full-Authentication-System" target="_blank" rel="noopener norefresher" className="text-4xl">
                     <FaGithub/>
                     </a>

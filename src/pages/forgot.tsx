@@ -2,7 +2,7 @@ import Background from '@/components/Backgrounds/Background'
 import Forgotform from '@/components/forms/Forgot'
 import React from 'react'
 
-export default function auth({}: {}) {
+export default function forgot({}: {}) {
     return (
         <div className='w-full flex items-center justify-center'>
             <div className='w-full h-100 flex items-center justify-center'>
